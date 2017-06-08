@@ -16,6 +16,11 @@
 
 package com.example.android.architecture.blueprints.todoapp.statistics;
 
+import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
+import com.example.android.architecture.blueprints.todoapp.di.module.StatisticsPresenterModule;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.NavUtils;
@@ -26,9 +31,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.example.android.architecture.blueprints.todoapp.Injection;
-import com.example.android.architecture.blueprints.todoapp.R;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import javax.inject.Inject;
 
 /**
  * Show statistics for tasks.
@@ -36,6 +39,9 @@ import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 public class StatisticsActivity extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+
+    @Inject
+    StatisticsPresenter mStatisticsPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +73,11 @@ public class StatisticsActivity extends AppCompatActivity {
                     statisticsFragment, R.id.contentFrame);
         }
 
-        new StatisticsPresenter(
-                Injection.provideTasksRepository(getApplicationContext()), statisticsFragment);
+        ((ToDoApplication) getApplication()).getAppComponent()
+            .statisticsComponenet()
+            .statisticsPresenterModule(new StatisticsPresenterModule(statisticsFragment))
+            .build()
+            .inject(this);
     }
 
     @Override

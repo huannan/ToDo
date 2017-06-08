@@ -16,6 +16,12 @@
 
 package com.example.android.architecture.blueprints.todoapp.addedittask;
 
+import com.example.android.architecture.blueprints.todoapp.R;
+import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
+import com.example.android.architecture.blueprints.todoapp.di.module.AddEditTaskPresenterModule;
+import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
+import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
@@ -24,10 +30,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.example.android.architecture.blueprints.todoapp.Injection;
-import com.example.android.architecture.blueprints.todoapp.R;
-import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
-import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
+import javax.inject.Inject;
 
 /**
  * Displays an add or edit task screen.
@@ -38,7 +41,8 @@ public class AddEditTaskActivity extends AppCompatActivity {
 
     public static final String SHOULD_LOAD_DATA_FROM_REPO_KEY = "SHOULD_LOAD_DATA_FROM_REPO_KEY";
 
-    private AddEditTaskPresenter mAddEditTaskPresenter;
+    @Inject
+    AddEditTaskPresenter mAddEditTaskPresenter;
 
     private ActionBar mActionBar;
 
@@ -83,11 +87,11 @@ public class AddEditTaskActivity extends AppCompatActivity {
         }
 
         // Create the presenter
-        mAddEditTaskPresenter = new AddEditTaskPresenter(
-                taskId,
-                Injection.provideTasksRepository(getApplicationContext()),
-                addEditTaskFragment,
-                shouldLoadDataFromRepo);
+        ((ToDoApplication) getApplication()).getAppComponent()
+            .addEditTaskComponent()
+            .addEditTaskPresenterModule(new AddEditTaskPresenterModule(taskId, addEditTaskFragment, shouldLoadDataFromRepo))
+            .build()
+            .inject(this);
     }
 
     private void setToolbarTitle(@Nullable String taskId) {

@@ -51,8 +51,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
         return INSTANCE;
     }
 
-    // Prevent direct instantiation.
-    private TasksRemoteDataSource() {}
+    public TasksRemoteDataSource() {}
 
     private static void addTask(String title, String description) {
         Task newTask = new Task(title, description);
