@@ -1,4 +1,6 @@
-本分支是 fork 自 googlesamples 的 [android-architecture](https://github.com/googlesamples/android-architecture/tree/todo-mvp)，主要用以与其他分支做对比。
+本分支是 mvp 分支的 Dagger 2 版本，使用 Dagger 2 进行依赖注入，更多 Dagger 2 使用部分请看
+
+[Dagger 2 完全解析（四），Android 中使用 Dagger 2](http://johnnyshieh.me/posts/dagger-use-in-android/)
 
 # todo-mvp
 
