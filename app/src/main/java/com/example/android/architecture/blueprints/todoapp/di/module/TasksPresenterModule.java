@@ -14,15 +14,9 @@ import dagger.Provides;
 @Module
 public class TasksPresenterModule {
 
-    private final TasksContract.View mView;
-
-    public TasksPresenterModule(TasksContract.View view) {
-        mView = view;
-    }
-
     @Provides
     @ActivityScope
-    TasksPresenter provideTasksPresenter(TasksRepository tasksRepository) {
-        return new TasksPresenter(tasksRepository, mView);
+    TasksPresenter provideTasksPresenter(TasksRepository tasksRepository, TasksContract.View view) {
+        return new TasksPresenter(tasksRepository, view);
     }
 }

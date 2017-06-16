@@ -18,7 +18,6 @@ package com.example.android.architecture.blueprints.todoapp.statistics;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.example.android.architecture.blueprints.todoapp.di.module.StatisticsPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 
 import android.os.Bundle;
@@ -75,7 +74,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         ((ToDoApplication) getApplication()).getAppComponent()
             .statisticsComponenet()
-            .statisticsPresenterModule(new StatisticsPresenterModule(statisticsFragment))
+            .view(statisticsFragment)
             .build()
             .inject(this);
     }

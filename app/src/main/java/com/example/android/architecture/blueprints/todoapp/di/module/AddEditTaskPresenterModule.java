@@ -14,22 +14,10 @@ import dagger.Provides;
 @Module
 public class AddEditTaskPresenterModule {
 
-    private String mTaskId;
-
-    private AddEditTaskContract.View mView;
-
-    private boolean mIsDataMissing;
-
-    public AddEditTaskPresenterModule(String taskId,
-        AddEditTaskContract.View view, boolean isDataMissing) {
-        mTaskId = taskId;
-        mView = view;
-        mIsDataMissing = isDataMissing;
-    }
-
     @Provides
     @ActivityScope
-    AddEditTaskPresenter provideAddEditTaskPresenter(TasksRepository tasksRepository) {
-        return new AddEditTaskPresenter(mTaskId, tasksRepository, mView, mIsDataMissing);
+    AddEditTaskPresenter provideAddEditTaskPresenter(TasksRepository tasksRepository, String taskId,
+        AddEditTaskContract.View view, boolean isDataMissing) {
+        return new AddEditTaskPresenter(taskId, tasksRepository, view, isDataMissing);
     }
 }

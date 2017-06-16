@@ -3,7 +3,9 @@ package com.example.android.architecture.blueprints.todoapp.di.component;
 import com.example.android.architecture.blueprints.todoapp.di.ActivityScope;
 import com.example.android.architecture.blueprints.todoapp.di.module.StatisticsPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
+import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsContract;
 
+import dagger.BindsInstance;
 import dagger.Subcomponent;
 
 /**
@@ -17,7 +19,9 @@ public interface StatisticsComponenet {
 
     @Subcomponent.Builder
     interface Builder {
-        Builder statisticsPresenterModule(StatisticsPresenterModule module);
+        @BindsInstance
+        Builder view(StatisticsContract.View view);
+
         StatisticsComponenet build();
     }
 }

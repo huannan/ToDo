@@ -18,7 +18,6 @@ package com.example.android.architecture.blueprints.todoapp.taskdetail;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.example.android.architecture.blueprints.todoapp.di.module.TaskDetailPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 
 import android.os.Bundle;
@@ -67,7 +66,8 @@ public class TaskDetailActivity extends AppCompatActivity {
         // Create the presenter
         ((ToDoApplication) getApplication()).getAppComponent()
             .taskDetailComponent()
-            .taskDetailPresenterModule(new TaskDetailPresenterModule(taskDetailFragment, taskId))
+            .view(taskDetailFragment)
+            .taskId(taskId)
             .build()
             .inject(this);
     }

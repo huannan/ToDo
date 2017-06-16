@@ -3,7 +3,9 @@ package com.example.android.architecture.blueprints.todoapp.di.component;
 import com.example.android.architecture.blueprints.todoapp.di.ActivityScope;
 import com.example.android.architecture.blueprints.todoapp.di.module.TasksPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.tasks.TasksActivity;
+import com.example.android.architecture.blueprints.todoapp.tasks.TasksContract;
 
+import dagger.BindsInstance;
 import dagger.Subcomponent;
 
 /**
@@ -16,8 +18,10 @@ public interface TasksComponent {
     void inject(TasksActivity activity);
 
     @Subcomponent.Builder
-    interface Builder {
-        Builder taskPresenterModule(TasksPresenterModule module);
+    interface Builder  {
+        @BindsInstance
+        Builder view(TasksContract.View view);
+
         TasksComponent build();
     }
 }

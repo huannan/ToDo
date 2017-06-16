@@ -18,7 +18,6 @@ package com.example.android.architecture.blueprints.todoapp.addedittask;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.example.android.architecture.blueprints.todoapp.di.module.AddEditTaskPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
 
@@ -89,7 +88,9 @@ public class AddEditTaskActivity extends AppCompatActivity {
         // Create the presenter
         ((ToDoApplication) getApplication()).getAppComponent()
             .addEditTaskComponent()
-            .addEditTaskPresenterModule(new AddEditTaskPresenterModule(taskId, addEditTaskFragment, shouldLoadDataFromRepo))
+            .view(addEditTaskFragment)
+            .taskId(taskId)
+            .dataMissing(shouldLoadDataFromRepo)
             .build()
             .inject(this);
     }

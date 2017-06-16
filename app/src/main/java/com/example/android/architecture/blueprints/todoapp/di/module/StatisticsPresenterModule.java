@@ -14,15 +14,9 @@ import dagger.Provides;
 @Module
 public class StatisticsPresenterModule {
 
-    private final StatisticsContract.View mView;
-
-    public StatisticsPresenterModule(StatisticsContract.View view) {
-        mView = view;
-    }
-
     @Provides
     @ActivityScope
-    StatisticsPresenter provideStatisticsPresenter(TasksRepository tasksRepository) {
-        return new StatisticsPresenter(tasksRepository, mView);
+    StatisticsPresenter provideStatisticsPresenter(TasksRepository tasksRepository, StatisticsContract.View view) {
+        return new StatisticsPresenter(tasksRepository, view);
     }
 }

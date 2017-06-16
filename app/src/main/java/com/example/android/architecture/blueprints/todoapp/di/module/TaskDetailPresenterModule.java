@@ -14,19 +14,10 @@ import dagger.Provides;
 @Module
 public class TaskDetailPresenterModule {
 
-    private final TaskDetailContract.View mView;
-
-    private final String mTaskId;
-
-    public TaskDetailPresenterModule(TaskDetailContract.View view, String taskId) {
-        mView = view;
-        mTaskId = taskId;
-    }
-
     @Provides
     @ActivityScope
-    TaskDetailPresenter provideTaskDetailPresenter(TasksRepository tasksRepository) {
-        return new TaskDetailPresenter(mTaskId, tasksRepository, mView);
+    TaskDetailPresenter provideTaskDetailPresenter(TasksRepository tasksRepository, TaskDetailContract.View view, String taskId) {
+        return new TaskDetailPresenter(taskId, tasksRepository, view);
     }
 
 }

@@ -18,7 +18,6 @@ package com.example.android.architecture.blueprints.todoapp.tasks;
 
 import com.example.android.architecture.blueprints.todoapp.R;
 import com.example.android.architecture.blueprints.todoapp.ToDoApplication;
-import com.example.android.architecture.blueprints.todoapp.di.module.TasksPresenterModule;
 import com.example.android.architecture.blueprints.todoapp.statistics.StatisticsActivity;
 import com.example.android.architecture.blueprints.todoapp.util.ActivityUtils;
 import com.example.android.architecture.blueprints.todoapp.util.EspressoIdlingResource;
@@ -78,7 +77,7 @@ public class TasksActivity extends AppCompatActivity {
         // Create the presenter
         ((ToDoApplication) getApplication()).getAppComponent()
             .tasksComponent()
-            .taskPresenterModule(new TasksPresenterModule(tasksFragment))
+            .view(tasksFragment)
             .build()
             .inject(this);
 
